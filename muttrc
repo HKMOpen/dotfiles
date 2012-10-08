@@ -1,0 +1,75 @@
+# Gmail Config
+set from = "___"
+set realname = "___"
+
+set imap_user = "___"
+set imap_pass = "password"
+
+set folder = "imaps://imap.gmail.com:993"
+set spoolfile = "+INBOX"
+set postponed = "+[Gmail]/Drafts"
+
+folder-hook 'imaps://.*imap.gmail.com' unset record
+
+# This actually deletes the emails
+# By default, 'd' just removes tags and archives.
+# set trash = "imaps://imap.gmail.com/[Gmail]/Trash"
+
+set imap_idle
+set imap_check_subscribed
+unset imap_passive
+unset imap_peek
+
+set rfc2047_parameters
+
+set header_cache =~/.mutt/cache/headers
+set message_cachedir =~/.mutt/cache/bodies
+set certificate_file =~/.mutt/certificates
+
+set smtp_url = "smtp://___USERNAME____@smtp.gmail.com:587/"
+set smtp_pass = "password"
+
+ignore "Authentication-Results:"
+ignore "DomainKey-Signature:"
+ignore "DKIM-Signature:"
+hdr_order Date From To Cc
+
+ignore *
+unignore from: date subject to cc
+unignore x-mailing-list: posted-to:
+unignore x-mailer:
+
+set markers=no
+set pager_index_lines= 5
+set sort = 'threads'
+set sort_aux = 'last-date-received'
+
+bind index \Cp sidebar-prev
+bind index \Cn sidebar-next
+bind index \Co sidebar-open
+
+macro index \Cb '<enter-command>toggle sidebar_visible<enter><refresh>'
+macro pager \Cb '<enter-command>toggle sidebar_visible<enter><redraw-screen>'
+
+set sidebar_shortpath
+set sidebar_sort
+
+macro index,pager S "<save-message>=[Gmail]/Spam?<enter>" "mark message as spam"
+macro index,pager H "<save-message>=INBOX<enter>" "mark message as ham, move to inbox"
+
+color sidebar_new yellow default
+color normal white default
+color hdrdefault brightcyan default
+color signature green default
+color attachment brightyellow default
+color quoted green default
+color quoted1 white default
+color tilde blue default
+
+set editor='emacs -nw'
+set alias_file= ~/.mutt/aliases
+set sort_alias= alias
+set reverse_alias=yes
+
+source $alias_file
+source ~/.mutt/crypto

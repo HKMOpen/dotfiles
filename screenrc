@@ -1,0 +1,30 @@
+# ------------------
+# --*--screenrc--*--
+#-------------------
+
+# Define a sane GNU screen command entry character
+# C-T = screen command
+# C-T C-T = literal "C-T"
+escape "^T^T"
+
+# Status bar
+hardstatus on
+hardstatus alwayslastline
+hardstatus string "%{.bW}%-w%{.rW}%n %t%{-}%+w %=%{..G} %H %{..Y} %m/%d %C%a " 
+
+# Define a sane scrollback limit
+defscrollback 100000
+
+# Turn off annoying flickers
+vbell off
+
+# Turn off startup message
+startup_message off
+
+# Startup screens
+#screen bash
+#screen irssi
+#screen htop
+
+# Print a message when screen is detatched
+pow_detach_msg "Bye!"
